@@ -1,0 +1,23 @@
+### user lists
+GET http://localhost:8080/users
+
+### create user1
+POST http://localhost:8080/users
+Content-Type: application/x-www-form-urlencoded
+
+name=정호영&email=ho1@a.com&password=asdf9876
+
+### create user2
+POST http://localhost:8080/users
+Content-Type: application/x-www-form-urlencoded
+
+name=정호영&email=ho2@a.com&password=asdf9876
+
+### Fail to create user
+POST http://localhost:8080/users
+Content-Type: application/x-www-form-urlencoded
+
+name=정호영&email=ho2@a.com&password=asdf9876
+
+### user lists
+GET http://localhost:8080/users
