@@ -1,9 +1,2 @@
 ### welcome test
 GET http://localhost:8080
-
-
-### create user
-POST http://localhost:8080/users
-Content-Type: application/x-www-form-urlencoded
-
-name=정호영&email=honux@a.com&password=asdf9876
