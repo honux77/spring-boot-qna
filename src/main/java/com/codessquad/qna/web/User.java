@@ -1,21 +1,21 @@
 package com.codessquad.qna.web;
 
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
+import javax.persistence.*;
 
+@Entity
 public class User {
 
-    private static AtomicInteger currId = new AtomicInteger(0);
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(unique = true, nullable = false)
     private String email;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String password;
 
-    public User() {
-        this.id = currId.incrementAndGet();
-    }
-
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -37,21 +37,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return email.equals(user.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(email);
     }
 
     @Override

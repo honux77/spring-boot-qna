@@ -7,46 +7,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 @Controller
 public class UserController {
 
-    Logger logger = LoggerFactory.getLogger(UserController.class);
+    private Logger logger = LoggerFactory.getLogger(UserController.class);
+    private final UserRepository userRepository;
 
-    private List<User> users = Collections.synchronizedList(new ArrayList<>());
+    public UserController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/users")
     public String users(Model model) {
-        logger.debug("List users, total users = " + users.size());
-        model.addAttribute("users", users);
+        model.addAttribute("users", userRepository.findAll());
         return "user/list";
     }
 
     @PostMapping("/users")
     public String create(User user, Model model) {
         logger.debug("User info: " + user);
-
-        if (!validate(user)) {
-            logger.debug("User already exist: " + user);
-            return "redirect:/join?error=FailToCreateUser";
-        }
-        addUser(user);
+        userRepository.save(user);
         return "redirect:/users";
-    }
-
-    private void addUser(User user) {
-        users.add(user);
-    }
-
-    private boolean validate(User newUser) {
-        for (User user : users) {
-            if (user.equals(newUser)) {
-                return false;
-            }
-        }
-        return true;
     }
 }
