@@ -1,15 +1,30 @@
 package com.codessquad.qna.web;
 
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class User {
+
+    private static AtomicInteger currId = new AtomicInteger(0);
     private Integer id;
     private String email;
     private String name;
     private String password;
 
+    public User() {
+        this.id = currId.incrementAndGet();
+    }
+
     public Integer getId() {
         return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setEmail(String email) {
@@ -24,17 +39,7 @@ public class User {
         this.password = password;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     @Override
     public boolean equals(Object o) {

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -15,7 +16,7 @@ public class UserController {
 
     Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    private List<User> users = new ArrayList<>();
+    private List<User> users = Collections.synchronizedList(new ArrayList<>());
 
     @GetMapping("/users")
     public String users(Model model) {
@@ -38,7 +39,6 @@ public class UserController {
     }
 
     private void addUser(User user) {
-        user.setId(users.size() + 1);
         users.add(user);
     }
 
