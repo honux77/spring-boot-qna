@@ -22,7 +22,7 @@ public class UserController {
     public String users(Model model) {
         logger.debug("List users, total users = " + users.size());
         model.addAttribute("users", users);
-        return "users/list";
+        return "user/list";
     }
 
     @PostMapping("/users")
@@ -31,9 +31,8 @@ public class UserController {
 
         if (!validate(user)) {
             logger.debug("User already exist: " + user);
-            return "redirect:/users/form.html?error=FailToCreateUser";
+            return "redirect:/join?error=FailToCreateUser";
         }
-
         addUser(user);
         return "redirect:/users";
     }
