@@ -27,6 +27,11 @@ public class User {
         return name;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -46,5 +51,15 @@ public class User {
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public boolean validate() {
+        return this.name != null && this.email != null;
+    }
+
+    public void update(User user) {
+        this.name = user.name;
+        this.email = user.email;
+        if (this.password != null) this.password = user.password;
     }
 }
